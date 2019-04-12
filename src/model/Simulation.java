@@ -124,111 +124,98 @@ public class Simulation {
 	
 	public void sortByTime(){
 		Comparator<Flight> studentComparator = new TimeComparator();
-		
-			Arrays.sort(flights, studentComparator);
-		
-		
+		Arrays.sort(flights, studentComparator);
 	}
 	
-	public String binarySort(String parameter, String value){
-		int high = flights.length-1;
-		int low = 0;
-		int mid = -1;
-		boolean out = false;
-		switch (parameter) {
-		case "Schedule":
-			
-			for (int i = 0; i < flights.length && out == false ; i++) {
-				mid = (low+high)/2;
-				if(flights[mid].getSchedule().toString().equalsIgnoreCase(value)) {
-					out = true;
-				}else if(flights[mid].getSchedule().toString().compareTo(value)<0) {
-					high = mid-1;
-				}else if(flights[mid].getSchedule().toString().compareTo(value)>0) {
-					low = mid+1;
-				}
-			}
-			break;
-			
-		case "Date":
-			
-			for (int i = 0; i < flights.length && out == false ; i++) {
-				mid = (low+high)/2;
-				if(flights[mid].getDate().toString().equalsIgnoreCase(value)) {
-					out = true;
-				}else if(flights[mid].getDate().toString().compareTo(value)<0) {
-					high = mid-1;
-				}else if(flights[mid].getDate().toString().compareTo(value)>0) {
-					low = mid+1;
-				}
-			}
-			break;
-			
-		case "Airline":
-			
-			for (int i = 0; i < flights.length && out == false ; i++) {
-				mid = (low+high)/2;
-				if(flights[mid].getNameAirline().equalsIgnoreCase(value)) {
-					out = true;
-				}else if(flights[mid].getNameAirline().compareTo(value)<0) {
-					high = mid-1;
-				}else if(flights[mid].getNameAirline().compareTo(value)>0) {
-					low = mid+1;
-				}
-			}
-			break;
-			
-		case "Flight":
-			
-			for (int i = 0; i < flights.length && out == false ; i++) {
-				mid = (low+high)/2;
-				if(flights[mid].getIdAirline().equalsIgnoreCase(value)) {
-					out = true;
-				}else if(flights[mid].getIdAirline().compareTo(value)<0) {
-					high = mid-1;
-				}else if(flights[mid].getIdAirline().compareTo(value)>0) {
-					low = mid+1;
-				}
-			}
-			break;
-			
-		case "Destiny":
-			
-			for (int i = 0; i < flights.length && out == false ; i++) {
-				mid = (low+high)/2;
-				if(flights[mid].getDestinationCity().equalsIgnoreCase(value)) {
-					out = true;
-				}else if(flights[mid].getDestinationCity().compareTo(value)<0) {
-					high = mid-1;
-				}else if(flights[mid].getDestinationCity().compareTo(value)>0) {
-					low = mid+1;
-				}
-			}
-			break;
-			
-		case "Gate":
-			
-			for (int i = 0; i < flights.length && out == false ; i++) {
-				mid = (low+high)/2;
-				if(flights[mid].getBoardingGate().equalsIgnoreCase(value)) {
-					out = true;
-				}else if(flights[mid].getBoardingGate().compareTo(value)<0) {
-					high = mid-1;
-				}else if(flights[mid].getBoardingGate().compareTo(value)>0) {
-					low = mid+1;
-				}
-			}
-			break;
-			
-		default:
-			mid = -1; 
-			break;
-		}
-		Flight f =  flights[mid];
-		flights[flights.length-1]=f;
+	public String searchFlightByAirline(String airline) {
 		
+		sortByNameAirline();
+		airline.toUpperCase();
+		int index = -1;
+		int low = 0;
+		int high = flights.length-1;
+		
+		while(low <= high && index == -1) {
+			int mid = (low+high)/2;
+			int value = flights[mid].getNameAirline().compareTo(airline);
+			if(value < 0) {
+				low = mid+1;
+			} else if(value > 0) {
+				high = mid-1;
+			} else {
+				index = mid;
+			}
+		}
+		Flight f =  flights[index];
 		return f.toString();
 	}
+	public String searchFlightByCode(String code) {
+		int index = -1;
+		code.toUpperCase();
+		for (int i = 0; i < flights.length && index == -1; i++) {
+			if(code.equalsIgnoreCase(flights[i].getIdAirline())) {
+				index = i;
+			}
+		}
+		Flight f =  flights[index];
+		return f.toString();
+	}
+	public String searchFlightByGate(String gate) {
+		int index = -1;
+		int gateMin = Integer.parseInt(gate);
+		for (int i = 0; i < flights.length && index == -1; i++) {
+			int current= Integer.parseInt(flights[i].getBoardingGate());
+			if(current== gateMin) {
+				index = i;
+			}
+		}
+		Flight f =  flights[index];
+		return f.toString();
+	}
+
+	public String searchFlightByDestination(String destination) {
+		sortByDestinationCity();
+		destination.toUpperCase();
+		int index = -1;
+		int low = 0;
+		int high = flights.length-1;
+		while(low <= high && index == -1) {
+			int mid = (low+high)/2;
+			int value = flights[mid].getDestinationCity().compareTo(destination);
+			if(value < 0) {
+				low = mid+1;
+			} else if(value > 0) {
+				high = mid-1;
+			} else {
+				index = mid;
+			}
+		}
+		Flight f =  flights[index];
+		return f.toString();
+	}
+
+	public String searchFlightByDate(String date) {
+		int index = -1;
+		for (int i = 0; i < flights.length && index == -1; i++) {
+			if(flights[i].getDate().toString().equalsIgnoreCase(date)) {
+				index = i;
+			}
+		}
+		Flight f =  flights[index];
+		return f.toString();
+	}
+	
+	public String searchFlightByTime(String time) {
+		int index = -1;
+		for (int i = 0; i < flights.length && index == -1; i++) {
+			if(flights[i].getSchedule().toString().equalsIgnoreCase(time)) {
+				index = i;
+			}
+		}
+		Flight f =  flights[index];
+		return f.toString();
+	}
+	
 	
 	public int getNumberFlights() {
 		return numberFlights;

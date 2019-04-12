@@ -72,7 +72,6 @@ public class FlightController {
     @FXML
     public void searching(ActionEvent event) {
     	String o= (String) optionsSearch.getValue();
-    	//String o= "Airline";
     	try {
     		
 	    	if(o.equals("Date")) {
@@ -84,7 +83,7 @@ public class FlightController {
 	           	info.setHeaderText(null);
 	           	info.initStyle(StageStyle.UTILITY);
 	           	
-	           	info.setContentText(s.binarySort("Date", value));
+	           	info.setContentText(s.searchFlightByDate(value));
 	           	info.show();
 	           	long endTime = (System.currentTimeMillis() - start)/1000;
 	           	time.setText("Time: "+endTime);
@@ -97,7 +96,7 @@ public class FlightController {
 	           	info.setTitle("Simulation");
 	           	info.setHeaderText(null);
 	           	info.initStyle(StageStyle.UTILITY);
-	           	info.setContentText(s.binarySort("Schedule", value));
+	           	info.setContentText(s.searchFlightByTime(value));
 	           	info.show();
 	           	long endTime = (System.currentTimeMillis() - start)/1000;
 	           	time.setText("Time: "+endTime);
@@ -105,11 +104,12 @@ public class FlightController {
 	    		long start = System.currentTimeMillis();
 	    		search.setPromptText("Name Airline");
 	    		String value = search.getText();
+	    		
 	    		Alert info = new Alert(AlertType.INFORMATION);
 	           	info.setTitle("Simulation");
 	           	info.setHeaderText(null);
 	           	info.initStyle(StageStyle.UTILITY);
-	           	info.setContentText(s.binarySort("Airline", value));
+	           	info.setContentText(s.searchFlightByAirline(value));
 	           	info.show();
 	           	long endTime = (System.currentTimeMillis() - start)/1000;
 	           	time.setText("Time: "+endTime);
@@ -121,7 +121,7 @@ public class FlightController {
 	           	info.setTitle("Simulation");
 	           	info.setHeaderText(null);
 	           	info.initStyle(StageStyle.UTILITY);
-	           	info.setContentText(s.binarySort("Flight", value));
+	           	info.setContentText(s.searchFlightByCode(value));
 	           	info.show();
 	           	long endTime = (System.currentTimeMillis() - start)/1000;
 	           	time.setText("Time: "+endTime);
@@ -133,7 +133,7 @@ public class FlightController {
 	           	info.setTitle("Simulation");
 	           	info.setHeaderText(null);
 	           	info.initStyle(StageStyle.UTILITY);
-	           	info.setContentText(s.binarySort("Destiny", value));
+	           	info.setContentText(s.searchFlightByDestination(value));
 	           	info.show();
 	           	long endTime = (System.currentTimeMillis() - start)/1000;
 	           	time.setText("Time: "+endTime);
@@ -145,7 +145,7 @@ public class FlightController {
 	           	info.setTitle("Simulation");
 	           	info.setHeaderText(null);
 	           	info.initStyle(StageStyle.UTILITY);
-	           	info.setContentText(s.binarySort("Gate", value));
+	           	info.setContentText(s.searchFlightByGate(value));
 	           	info.show();
 	           	long endTime = (System.currentTimeMillis() - start)/1000;
 	           	time.setText("Time: "+endTime);
