@@ -15,7 +15,7 @@
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.FlightController">
    <top>
-      <VBox prefHeight="87.0" prefWidth="800.0" style="-fx-background-image: &quot;imgs/fondo.jpg&quot;;" styleClass="root" stylesheets="@../CSS/mycss.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="87.0" prefWidth="800.0" styleClass="root" stylesheets="@../CSS/mycss.css" BorderPane.alignment="CENTER">
          <children>
             <GridPane fx:id="gp" prefHeight="105.0" prefWidth="800.0">
               <columnConstraints>
